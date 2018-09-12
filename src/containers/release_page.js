@@ -8,15 +8,16 @@ class ReleasePage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { isLoading: false, release_id: "81987" };
+    this.state = { isLoading: false };
   }
 
   componentWillMount() {
-    this.props.fetchRelease(this.state.release_id);
+    this.props.fetchRelease(this.props.match.params.id);
   }
 
   render() {
     const { release } = this.props.release;
+
     return (
       <div>
         <ReleasePageItem release={release} />
@@ -26,15 +27,14 @@ class ReleasePage extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  let actions = bindActionCreators({ fetchRelease }, dispatch);
-  return { ...actions, dispatch };
+  return bindActionCreators({ fetchRelease }, dispatch);
 }
 
-// function mapStateToProps(state) {
-//   return { release: state.release };
-// }
+function mapStateToProps(state, ownProps) {
+  return { release: state.release };
+}
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ReleasePage);

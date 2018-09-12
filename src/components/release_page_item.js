@@ -3,13 +3,14 @@ import { connect } from "react-redux";
 
 class ReleasePageItem extends Component {
   render() {
-    const { release } = this.props;
-    let { year } = release.year;
+    const release = this.props.release;
+    let year = release.year;
 
-    let { title } = release.title;
-    let { id } = release.id;
-    // let { size } = release.size;
-    // let image = this.props.data.cover_image;
+    let title = release.title;
+    let id = release.id;
+    let styles = release.styles;
+    let country = release.country;
+    // // let { size } = release.size;
 
     const url = `https://www.discogs.com/release/${id}`;
 
@@ -20,12 +21,16 @@ class ReleasePageItem extends Component {
 
     return (
       <div>
-        {/* <a href={url} target="_blank">
-       <img height={size} width={size} src={image} title={title} alt={title} /> */}
-        <h1>{title}</h1>
-        <h4>{year}</h4>
+        <a href={url} target="_blank">
+          {/* <img src={image} title={title} alt={title} /> */}
+          {/* <h1>{title}</h1>
+        <h4>{year}</h4> */}
 
-        <h1>release page</h1>
+          <h1>{title}</h1>
+          <h4>{year}</h4>
+          <h4>{styles}</h4>
+          <h4>{country}</h4>
+        </a>
       </div>
     );
   }

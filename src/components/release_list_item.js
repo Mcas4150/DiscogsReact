@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { fetchRelease } from "../actions/releaseActions";
+import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
 
 class ReleaseListItem extends Component {
+  constructor() {
+    super();
+  }
+
   render() {
     let { title } = this.props.data;
     let { id } = this.props.data;
@@ -17,7 +23,8 @@ class ReleaseListItem extends Component {
     }
 
     return (
-      <Link to={`/release/${id}`}>
+      <Link to={{ pathname: `/release/${id}` }}>
+        {/* <Link to={{ pathname: `/release/${id}`, state: { release_id: { id } } }}> */}
         <img height={size} width={size} src={image} title={title} alt={title} />
       </Link>
     );
@@ -28,8 +35,16 @@ ReleaseListItem.defaultProps = {
   size: 250
 };
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchRelease }, dispatch);
+}
+
 function mapStateToProps(state) {
+  // return { coversize: state.coversize, release: state.release };
   return { coversize: state.coversize };
 }
 
-export default connect(mapStateToProps)(ReleaseListItem);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ReleaseListItem);
