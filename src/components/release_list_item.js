@@ -15,8 +15,6 @@ class ReleaseListItem extends Component {
     let { size } = this.props;
     let image = this.props.data.cover_image;
 
-    const url = `https://www.discogs.com/release/${id}`;
-
     if (this.props.coversize === "small") {
       size = 150;
       image = this.props.data.thumb;
@@ -24,7 +22,6 @@ class ReleaseListItem extends Component {
 
     return (
       <Link to={{ pathname: `/release/${id}` }}>
-        {/* <Link to={{ pathname: `/release/${id}`, state: { release_id: { id } } }}> */}
         <img height={size} width={size} src={image} title={title} alt={title} />
       </Link>
     );

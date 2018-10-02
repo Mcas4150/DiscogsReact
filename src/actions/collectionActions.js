@@ -7,8 +7,8 @@ import {
   UPDATE_COVER_SIZE
 } from "./types";
 
-export function fetchUserCollection(username, items = 50) {
-  const url = `${ROOT_URL}/users/${username}/collection/folders/0/releases?token=${API_KEY}&per_page=${items}`;
+export function fetchUserCollection(items = 50) {
+  const url = `${ROOT_URL}/users/charmingultra/collection/folders/0/releases?token=${API_KEY}&per_page=${items}`;
   const request = axios.get(url);
 
   return {

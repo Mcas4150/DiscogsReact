@@ -9,17 +9,17 @@ import {
 class SearchBar extends Component {
   constructor(props) {
     super(props);
-    this.state = { username: "", coverSize: "large", items: 50 };
+    this.state = { coverSize: "large", items: 50 };
 
-    this.onInputChange = this.onInputChange.bind(this);
+    // this.onInputChange = this.onInputChange.bind(this);
     this.onCoverSizeChange = this.onCoverSizeChange.bind(this);
     this.onItemsChange = this.onItemsChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  onInputChange(event) {
-    this.setState({ username: event.target.value });
-  }
+  // onInputChange(event) {
+  //   this.setState({ username: event.target.value });
+  // }
 
   onCoverSizeChange(event) {
     this.setState({ coverSize: event.target.value });
@@ -35,13 +35,13 @@ class SearchBar extends Component {
     event.preventDefault();
 
     // We need to go and fetch user releases.
-    this.props.fetchUserCollection(this.state.username, this.state.items);
+    this.props.fetchUserCollection(this.state.items);
   }
 
   render() {
     return (
       <form onSubmit={this.onFormSubmit} className="input-group">
-        <input
+        {/* <input
           placeholder="Type in your discogs username"
           className="form-control rounded"
           onChange={this.onInputChange}
@@ -51,7 +51,7 @@ class SearchBar extends Component {
           <button type="submit" className="btn btn-primary ml-2">
             Submit
           </button>
-        </span>
+        </span> */}
         <div className="input-group input-group-sm mt-2">
           <div className="input-group-prepend">
             <label className="input-group-text" htmlFor="inputGroupSelect01">

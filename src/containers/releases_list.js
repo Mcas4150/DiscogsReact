@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import { bindActionCreators } from "redux";
 import ReleaseListItem from "../components/release_list_item";
-import { fetchCollectionNextPage } from "../actions/collectionActions";
+import {
+  fetchCollectionNextPage,
+  fetchUserCollection
+} from "../actions/collectionActions";
 
 class ReleasesList extends Component {
   constructor(props) {
@@ -14,6 +17,7 @@ class ReleasesList extends Component {
   }
 
   componentDidMount() {
+    this.props.fetchUserCollection(50);
     window.addEventListener("scroll", this.onScroll, false);
   }
 
@@ -61,7 +65,10 @@ class ReleasesList extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchCollectionNextPage }, dispatch);
+  return bindActionCreators(
+    { fetchCollectionNextPage, fetchUserCollection },
+    dispatch
+  );
 }
 
 function mapStateToProps(state) {
