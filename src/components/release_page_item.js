@@ -13,15 +13,22 @@ class ReleasePageItem extends Component {
     const url = `https://www.discogs.com/release/${id}`;
 
     let year = releaseData.year;
-    let image = releaseData.thumb;
+    // let image = releaseData.thumb;
     let title = releaseData.title;
     let id = releaseData.id;
     let style = releaseData.styles;
     let country = releaseData.country;
     let styles = [];
     let uri = [];
+    let images = [];
 
     // let uri = this.props.release.videos.duration[0];
+    if (_.isArray(releaseData.images) && !_.isEmpty(releaseData.images)) {
+      releaseData.images.map(image => {
+        images.push(image.uri);
+      });
+    }
+
     if (_.isArray(releaseData.styles) && !_.isEmpty(releaseData.styles)) {
       releaseData.styles.map(style => {
         styles.push(style);
@@ -40,7 +47,7 @@ class ReleasePageItem extends Component {
     return (
       <div>
         <a href={url} target="_blank">
-          <img src={image} title={title} alt={title} />
+          <img src={images[0]} title={title} alt={title} />
           {/* <h1>{title}</h1>
         <h4>{year}</h4> */}
 
