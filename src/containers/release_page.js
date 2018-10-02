@@ -30,7 +30,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchRelease }, dispatch);
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return { release: state.release };
 }
 

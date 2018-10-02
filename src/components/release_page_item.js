@@ -1,23 +1,41 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Youtube from "react-youtube";
+import _ from "lodash";
 
 class ReleasePageItem extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
   }
 
   render() {
-    const release = this.props.release;
-    let year = release.year;
-    let image = release.thumb;
-    let title = release.title;
-    let id = release.id;
-    let styles = release.styles;
-    let country = release.country;
-    // let uri = release.videos[0].uri;
-
+    const releaseData = this.props.release;
     const url = `https://www.discogs.com/release/${id}`;
+
+    let year = releaseData.year;
+    let image = releaseData.thumb;
+    let title = releaseData.title;
+    let id = releaseData.id;
+    let style = releaseData.styles;
+    let country = releaseData.country;
+    let styles = [];
+    let uri = [];
+
+    // let uri = this.props.release.videos.duration[0];
+    if (_.isArray(releaseData.styles) && !_.isEmpty(releaseData.styles)) {
+      releaseData.styles.map(style => {
+        styles.push(style);
+      });
+    }
+
+    if (_.isArray(releaseData.videos) && !_.isEmpty(releaseData.videos)) {
+      releaseData.videos.map(video => {
+        // uri.push(video.uri);
+        let uriLink = video.uri;
+        let uriCode = uriLink.substr(uriLink.indexOf("=") + 1);
+        uri.push(uriCode);
+      });
+    }
 
     return (
       <div>
@@ -28,11 +46,12 @@ class ReleasePageItem extends Component {
 
           <h1>{title}</h1>
         </a>
+
         <h4>{year}</h4>
-        <h4>{styles}</h4>
+        <h4>{styles[0]}</h4>
         <h4>{country}</h4>
-        {/* <h4>{uri}</h4> */}
-        <Youtube videoId="BLSLTuLavUA" />
+
+        <Youtube videoId={uri[0]} />
       </div>
     );
   }
